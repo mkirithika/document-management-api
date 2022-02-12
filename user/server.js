@@ -3,7 +3,7 @@ import { loadSync } from "@grpc/proto-loader";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 
-import { userService } from "./service/user.service.js";
+import userService from "./service/user.service.js";
 import { connectDB } from "./connect.js";
 
 connectDB();
@@ -16,7 +16,7 @@ const grpcObject = loadPackageDefinition(packageDef);
 const userPackage = grpcObject.userPackage;
 
 const server = new Server();
-server.bind("localhost:4000", ServerCredentials.createInsecure());
+server.bind("localhost:5000", ServerCredentials.createInsecure());
 
 server.addService(userPackage.User.service, {
   signUp: userService.signUp,

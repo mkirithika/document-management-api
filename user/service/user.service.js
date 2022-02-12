@@ -51,7 +51,7 @@ const getTokenData = (userData) => {
   };
 };
 
-export const userService = {
+export default {
   signUp: handleSignUp,
   login: handleLogin,
 };
