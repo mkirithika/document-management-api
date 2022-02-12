@@ -7,11 +7,8 @@ const handleSignUp = async (call, send) => {
     const userData = call.request;
     userData.salt = generateSalt(); // unique salt is generated for each user
     userData.password = hashPassword(userData.password, userData.salt); // Password hashed and stored in DB
-
     const insertedUser = await User.create(userData);
-
     const tokenObj = getTokenData(insertedUser);
-
     send(null, {
       ...tokenObj,
       token: generateToken(tokenObj),
@@ -26,14 +23,16 @@ const handleLogin = async (call, send) => {
   try {
     const requestData = call.request;
     const userData = await User.findOne({ email: call.request.email });
+
+    if (!userData) {
+      return send({ statusCode: 404, message: "User not found" });
+    }
     const requestPassword = hashPassword(requestData.password, userData.salt);
 
     if (requestPassword !== userData.password) {
-      return send("Incorrect email or password");
+      return send({ statusCode: 401, message: "Incorrect email or password" });
     }
-
     const tokenObj = getTokenData(userData);
-
     send(null, {
       ...tokenObj,
       token: generateToken(tokenObj),

@@ -11,7 +11,7 @@ connectDB();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const packageDef = loadSync(__dirname + "/proto/user.proto", {});
+const packageDef = loadSync(__dirname + "/../proto/user.proto", {});
 const grpcObject = loadPackageDefinition(packageDef);
 const userPackage = grpcObject.userPackage;
 

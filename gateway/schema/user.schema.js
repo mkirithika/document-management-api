@@ -11,11 +11,4 @@ const loginRequest = joi.object({
   password: joi.string().min(6).required(),
 });
 
-const userResponse = joi.object({
-  id: joi.string().required(),
-  name: joi.string().required(),
-  email: joi.string().required(),
-  token: joi.string().required(),
-});
-
-export default { signUpRequest, loginRequest, userResponse };
+export default { signUpRequest, loginRequest };

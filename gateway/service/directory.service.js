@@ -1,4 +1,4 @@
-const create = (directoryInfo) => {
+const createDirectory = (directoryInfo) => {
   try {
     console.log(directoryInfo);
   } catch (error) {
@@ -39,7 +39,7 @@ const deleteDirectory = (type, id) => {
 };
 
 export default {
-  create,
+  createDirectory,
   getDirectories,
   getFile,
   updateDirectory,

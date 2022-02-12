@@ -1,17 +1,25 @@
+import client from "../client/user.client.js";
+
 const signUp = (signUpInfo) => {
-  try {
-    console.log(signUpInfo);
-  } catch (error) {
-    throw error;
-  }
+  return new Promise((resolve, reject) => {
+    client.signUp(signUpInfo, (error, user) => {
+      if (error) {
+        return reject(error);
+      }
+      resolve(user);
+    });
+  });
 };
 
 const login = (loginInfo) => {
-  try {
-    console.log(loginInfo);
-  } catch (error) {
-    throw error;
-  }
+  return new Promise((resolve, reject) => {
+    client.login(loginInfo, (error, user) => {
+      if (error) {
+        return reject(error);
+      }
+      resolve(user);
+    });
+  });
 };
 
 export default { signUp, login };

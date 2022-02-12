@@ -2,7 +2,7 @@ import schema from "../schema/directory.schema.js";
 import service from "../service/directory.service.js";
 import { validate } from "./validate.js";
 
-const create = async (request, response) => {
+const createDirectory = async (request, response) => {
   try {
     let validRequest;
     if (request.body.type === "file") {
@@ -19,7 +19,7 @@ const create = async (request, response) => {
         name: request.file.originalname,
       });
     }
-    const user = await service.create(validRequest);
+    const user = await service.createDirectory(validRequest);
     response.send(validate(schema.directoryResponse, user));
   } catch (error) {
     response.status(error.statusCode || 500).send(error);
@@ -67,7 +67,7 @@ const deleteDirectory = async (request, response) => {
 };
 
 export default {
-  create,
+  createDirectory,
   getDirectories,
   getFile,
   updateDirectory,

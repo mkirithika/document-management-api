@@ -17,7 +17,11 @@ app.options("*", cors());
 
 app.post("/signup", userController.signUp);
 app.post("/login", userController.login);
-app.post("/directories", upload.single("file"), directoryController.create);
+app.post(
+  "/directories",
+  upload.single("file"),
+  directoryController.createDirectory
+);
 app.get("/directories", directoryController.getDirectories);
 app.get("/directories/files/:id", directoryController.getFile);
 app.put("/directories/:id", directoryController.updateDirectory);
