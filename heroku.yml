@@ -1,0 +1,5 @@
+build:
+  docker:
+    gateway: Dockerfile.gateway
+    user: Dockerfile.user
+    directory: Dockerfile.directory
