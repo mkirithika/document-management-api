@@ -23,6 +23,42 @@ message DirectoryResponse {
     string type = 8;
 }
 
+message GetFileRequest {
+    string id = 1;
+}
+
+message GetFileResponse {
+    bytes content = 1;
+}
+
+message GetAllRequest {
+    string parentId = 1;
+}
+
+message GetAllResponse {
+    repeated DirectoryResponse directories = 1;
+}
+
+message UpdateRequest {
+    string id = 1;
+    string name = 2;
+    int32 prevSequence = 3;
+    int32 nextSequence = 4;
+}
+
+message DeleteRequest {
+    string id = 1;
+    string type = 2;
+}
+
+message DeleteResponse {
+    string message = 1;
+}
+
 service Directory {
-    rpc createDirectory(stream CreateRequest) returns (DirectoryResponse);
+    rpc create(stream CreateRequest) returns (DirectoryResponse);
+    rpc getFile(GetFileRequest) returns (stream GetFileResponse);
+    rpc getAll(GetAllRequest) returns (GetAllResponse);
+    rpc update(UpdateRequest) returns (DirectoryResponse);
+    rpc deleteById(DeleteRequest) returns (DeleteResponse);
 } 

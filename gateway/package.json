@@ -6,6 +6,9 @@
   "author": "kirithika",
   "license": "MIT",
   "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
   "dependencies": {
     "@grpc/proto-loader": "^0.6.9",
     "cors": "^2.8.5",

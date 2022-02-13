@@ -19,7 +19,11 @@ const server = new Server();
 server.bind("localhost:6000", ServerCredentials.createInsecure());
 
 server.addService(directoryPackage.Directory.service, {
-  createDirectory: directoryService.create,
+  create: directoryService.create,
+  getFile: directoryService.getFile,
+  getAll: directoryService.getAll,
+  update: directoryService.update,
+  deleteById: directoryService.deleteById,
 });
 
 server.start();

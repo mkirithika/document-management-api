@@ -35,6 +35,9 @@ const validateToken = async (request, response, next) => {
   }
 };
 
+app.get("/healthcheck", (request, response) => {
+  response.send("Pong");
+});
 app.post("/signup", userController.signUp);
 app.post("/login", userController.login);
 app.post(
@@ -43,10 +46,10 @@ app.post(
   upload.single("file"),
   directoryController.create
 );
-app.get("/directories", directoryController.getAll);
-app.get("/directories/files/:id", directoryController.getFile);
-app.put("/directories/:id", directoryController.update);
-app.delete("/directories/:id", directoryController.deleteById);
+app.get("/directories", validateToken, directoryController.getAll);
+app.get("/directories/files/:id", validateToken, directoryController.getFile);
+app.put("/directories/:id", validateToken, directoryController.update);
+app.delete("/directories/:id", validateToken, directoryController.deleteById);
 
 app.listen(4000);
 console.log("Gateway service started");

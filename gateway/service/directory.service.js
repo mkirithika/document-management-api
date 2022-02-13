@@ -4,7 +4,7 @@ import { splitBufferIntoChunks } from "./utils.js";
 const create = (directoryInfo) => {
   const chunks = splitBufferIntoChunks(directoryInfo.content);
   return new Promise((resolve, reject) => {
-    const call = client.createDirectory((error, directory) => {
+    const call = client.create((error, directory) => {
       if (error) {
         return reject(error);
       }
@@ -22,33 +22,58 @@ const create = (directoryInfo) => {
   });
 };
 
-const getDirectories = (parentId) => {
+const getAll = (parentId) => {
   try {
-    console.log(parentId);
+    return new Promise((resolve, reject) => {
+      client.getAll({ parentId }, (error, directories) => {
+        if (error) {
+          return reject(error);
+        }
+        resolve(directories);
+      });
+    });
   } catch (error) {
     throw error;
   }
 };
 
 const getFile = (id) => {
+  return new Promise((resolve, reject) => {
+    const call = client.getFile({ id });
+    const fileBuffer = [];
+    // Receive file streams
+    call.on("data", (chunk) => {
+      fileBuffer.push(chunk.content);
+    });
+    call.on("end", () => resolve(fileBuffer));
+  });
+};
+
+const update = (updateInfo) => {
   try {
-    console.log(id);
+    return new Promise((resolve, reject) => {
+      client.update(updateInfo, (error, user) => {
+        if (error) {
+          return reject(error);
+        }
+        resolve(user);
+      });
+    });
   } catch (error) {
     throw error;
   }
 };
 
-const updateDirectory = (updateInfo) => {
+const deleteById = (type, id) => {
   try {
-    console.log(updateInfo);
-  } catch (error) {
-    throw error;
-  }
-};
-
-const deleteDirectory = (type, id) => {
-  try {
-    console.log(type, id);
+    return new Promise((resolve, reject) => {
+      client.deleteById({ id, type }, (error, response) => {
+        if (error) {
+          return reject(error);
+        }
+        resolve(response);
+      });
+    });
   } catch (error) {
     throw error;
   }
@@ -56,8 +81,8 @@ const deleteDirectory = (type, id) => {
 
 export default {
   create,
-  getDirectories,
+  getAll,
   getFile,
-  updateDirectory,
-  deleteDirectory,
+  update,
+  deleteById,
 };

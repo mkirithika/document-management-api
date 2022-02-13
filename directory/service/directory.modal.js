@@ -16,7 +16,7 @@ const directorySchema = new mongoose.Schema({
 const fileSchema = new mongoose.Schema({
   userId: { type: String, required: true },
   directoryId: { type: String, required: true },
-  content: { type: String, required: true },
+  content: { type: [Buffer], required: true },
   createdOn: { type: Date, default: Date.now },
   updatedOn: { type: Date, default: Date.now },
 });

@@ -41,7 +41,10 @@ const getAll = async (request, response) => {
 const getFile = async (request, response) => {
   try {
     const fileContent = await service.getFile(request.params.id);
-    response.send(fileContent);
+    fileContent.forEach((content) => {
+      response.write(content);
+    });
+    response.status(200).send();
   } catch (error) {
     response.status(error.statusCode || 500).send(error);
   }

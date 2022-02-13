@@ -3,7 +3,7 @@ import joi from "joi";
 const createFileRequest = joi.object({
   userId: joi.string().required(),
   name: joi.string().required(),
-  size: joi.number().required(),
+  size: joi.number().required().max(2055602),
   mimeType: joi.string().required(),
   type: joi.string().required(),
   parentId: joi.string(),
