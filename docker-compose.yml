@@ -1,0 +1,33 @@
+version: '2.0'
+
+services:
+  user:
+    build:
+      context: .
+      dockerfile: Dockerfile.user
+    container_name: user
+    networks: ['dms']
+
+  directory:
+    build:
+      context: .
+      dockerfile: Dockerfile.directory
+    container_name: directory
+    networks: ['dms']
+
+  gateway:
+    build:
+      context: .
+      dockerfile: Dockerfile.gateway
+    container_name: gateway
+    ports: ['4000:4000']
+    networks: ['dms']
+    depends_on: ['user', 'directory']
+    environment:
+      user_service: 'user:5000'
+      directory_service: 'directory:6000'
+
+networks:
+  dms:
+    name: dms
+    driver: 'bridge'

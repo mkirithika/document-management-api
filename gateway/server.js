@@ -35,7 +35,7 @@ const validateToken = async (request, response, next) => {
   }
 };
 
-app.get("/healthcheck", (request, response) => {
+app.get("/ping", (request, response) => {
   response.send("Pong");
 });
 app.post("/signup", userController.signUp);

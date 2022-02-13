@@ -11,7 +11,7 @@ const packageDef = loadSync(__dirname + "/../../proto/directory.proto", {});
 const DirectoryService =
   loadPackageDefinition(packageDef).directoryPackage.Directory;
 const client = new DirectoryService(
-  "localhost:6000",
+  process.env.directory_service,
   credentials.createInsecure()
 );
 

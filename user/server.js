@@ -16,7 +16,7 @@ const grpcObject = loadPackageDefinition(packageDef);
 const userPackage = grpcObject.userPackage;
 
 const server = new Server();
-server.bind("localhost:5000", ServerCredentials.createInsecure());
+server.bind("0.0.0.0:5000", ServerCredentials.createInsecure());
 
 server.addService(userPackage.User.service, {
   signUp: userService.signUp,

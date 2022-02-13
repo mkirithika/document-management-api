@@ -16,7 +16,7 @@ const grpcObject = loadPackageDefinition(packageDef);
 const directoryPackage = grpcObject.directoryPackage;
 
 const server = new Server();
-server.bind("localhost:6000", ServerCredentials.createInsecure());
+server.bind("0.0.0.0:6000", ServerCredentials.createInsecure());
 
 server.addService(directoryPackage.Directory.service, {
   create: directoryService.create,

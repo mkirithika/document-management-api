@@ -9,6 +9,9 @@ const __dirname = dirname(__filename);
 const packageDef = loadSync(__dirname + "/../../proto/user.proto", {});
 
 const UserService = loadPackageDefinition(packageDef).userPackage.User;
-const client = new UserService("localhost:5000", credentials.createInsecure());
+const client = new UserService(
+  process.env.user_service,
+  credentials.createInsecure()
+);
 
 export default client;
