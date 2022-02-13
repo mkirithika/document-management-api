@@ -1,0 +1,14 @@
+{
+  "name": "directory",
+  "version": "1.0.0",
+  "description": "Directory service",
+  "main": "server.js",
+  "author": "kirithika",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "@grpc/proto-loader": "^0.6.9",
+    "grpc": "^1.24.11",
+    "mongoose": "^6.2.1"
+  }
+}

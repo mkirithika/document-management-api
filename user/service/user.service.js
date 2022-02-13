@@ -1,7 +1,7 @@
 import { generateToken, generateSalt, hashPassword } from "./utils.js";
 import User from "./user.modal.js";
 
-const handleSignUp = async (call, send) => {
+const signUp = async (call, send) => {
   try {
     // Create user and token
     const userData = call.request;
@@ -18,7 +18,7 @@ const handleSignUp = async (call, send) => {
   }
 };
 
-const handleLogin = async (call, send) => {
+const login = async (call, send) => {
   // Validate user and create token
   try {
     const requestData = call.request;
@@ -51,6 +51,6 @@ const getTokenData = (userData) => {
 };
 
 export default {
-  signUp: handleSignUp,
-  login: handleLogin,
+  signUp,
+  login,
 };

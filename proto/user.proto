@@ -2,13 +2,13 @@ syntax = "proto3";
 
 package userPackage;
 
-message signUpRequest {
+message SignUpRequest {
     string name = 1;
     string email = 2;
     string password = 3;
 }
 
-message loginRequest {
+message LoginRequest {
     string email = 2;
     string password = 3;
 }
@@ -21,6 +21,6 @@ message UserResponse {
 }
 
 service User {
-    rpc signUp(signUpRequest) returns (UserResponse);
-    rpc login(loginRequest) returns (UserResponse);
+    rpc signUp(SignUpRequest) returns (UserResponse);
+    rpc login(LoginRequest) returns (UserResponse);
 } 

@@ -1,9 +1,25 @@
-const createDirectory = (directoryInfo) => {
-  try {
-    console.log(directoryInfo);
-  } catch (error) {
-    throw error;
-  }
+import client from "../client/directory.client.js";
+import { splitBufferIntoChunks } from "./utils.js";
+
+const create = (directoryInfo) => {
+  const chunks = splitBufferIntoChunks(directoryInfo.content);
+  return new Promise((resolve, reject) => {
+    const call = client.createDirectory((error, directory) => {
+      if (error) {
+        return reject(error);
+      }
+      resolve(directory);
+    });
+    if (directoryInfo.type === "folder") {
+      call.write({ ...directoryInfo });
+    } else {
+      chunks.forEach((chunk) => {
+        call.write({ ...directoryInfo, content: chunk });
+      });
+    }
+
+    call.end();
+  });
 };
 
 const getDirectories = (parentId) => {
@@ -39,7 +55,7 @@ const deleteDirectory = (type, id) => {
 };
 
 export default {
-  createDirectory,
+  create,
   getDirectories,
   getFile,
   updateDirectory,

@@ -2,7 +2,7 @@ import schema from "../schema/directory.schema.js";
 import service from "../service/directory.service.js";
 import { validate } from "./validate.js";
 
-const createDirectory = async (request, response) => {
+const create = async (request, response) => {
   try {
     let validRequest;
     if (request.body.type === "file") {
@@ -13,23 +13,26 @@ const createDirectory = async (request, response) => {
         type: request.body.type,
         parentId: request.body.parentId,
         content: request.file.buffer,
+        userId: request.authInfo.id,
       });
     } else {
       validRequest = await validate(schema.createFolderRequest, {
-        name: request.file.originalname,
+        name: request.body.name,
+        userId: request.authInfo.id,
+        type: request.body.type,
       });
     }
-    const user = await service.createDirectory(validRequest);
-    response.send(validate(schema.directoryResponse, user));
+    const directory = await service.create(validRequest);
+    response.send(directory);
   } catch (error) {
     response.status(error.statusCode || 500).send(error);
   }
 };
 
-const getDirectories = async (request, response) => {
+const getAll = async (request, response) => {
   try {
-    const directories = await service.getDirectories(request.query?.parentId);
-    response.send(validate(schema.getDirectoriesResponse, directories));
+    const directories = await service.getAll(request.query?.parentId);
+    response.send(directories);
   } catch (error) {
     response.status(error.statusCode || 500).send(error);
   }
@@ -38,28 +41,28 @@ const getDirectories = async (request, response) => {
 const getFile = async (request, response) => {
   try {
     const fileContent = await service.getFile(request.params.id);
-    response.send(validate(schema.getFileResponse, fileContent));
+    response.send(fileContent);
   } catch (error) {
     response.status(error.statusCode || 500).send(error);
   }
 };
 
-const updateDirectory = async (request, response) => {
+const update = async (request, response) => {
   try {
     const validRequest = await validate(schema.updateRequest, {
       ...request.body,
       id: request.params.id,
     });
-    const directory = await service.updateDirectory(validRequest);
-    response.send(validate(schema.directoryResponse, directory));
+    const directory = await service.update(validRequest);
+    response.send(directory);
   } catch (error) {
     response.status(error.statusCode || 500).send(error);
   }
 };
 
-const deleteDirectory = async (request, response) => {
+const deleteById = async (request, response) => {
   try {
-    await service.deleteDirectory(request.query?.type, request.params.id);
+    await service.deleteById(request.query?.type, request.params.id);
     response.send({ success: true });
   } catch (error) {
     response.status(error.statusCode || 500).send(error);
@@ -67,9 +70,9 @@ const deleteDirectory = async (request, response) => {
 };
 
 export default {
-  createDirectory,
-  getDirectories,
+  create,
+  getAll,
   getFile,
-  updateDirectory,
-  deleteDirectory,
+  update,
+  deleteById,
 };

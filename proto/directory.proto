@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package directoryPackage;
+
+message CreateRequest {
+    string name = 1;
+    int32 size = 2;
+    string mimeType = 3;
+    string type = 4;
+    string parentId = 5;
+    bytes content = 6;
+    string userId = 7;
+}
+
+message DirectoryResponse {
+    string id = 1;
+    string name = 2;
+    string size = 3;
+    string mimeType = 4;
+    string isRoot = 5;
+    string sequence = 6;
+    string parentId = 7;
+    string type = 8;
+}
+
+service Directory {
+    rpc createDirectory(stream CreateRequest) returns (DirectoryResponse);
+} 

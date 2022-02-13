@@ -1,6 +1,7 @@
 import joi from "joi";
 
 const createFileRequest = joi.object({
+  userId: joi.string().required(),
   name: joi.string().required(),
   size: joi.number().required(),
   mimeType: joi.string().required(),
@@ -10,26 +11,9 @@ const createFileRequest = joi.object({
 });
 
 const createFolderRequest = joi.object({
+  userId: joi.string().required(),
   name: joi.string().required(),
-});
-
-const directoryResponse = joi.object({
-  id: joi.string().required(),
-  name: joi.string().required(),
-  size: joi.number(),
-  mimeType: joi.string(),
-  type: joi.string().required().valid("file", "folder"),
-  sequence: joi.number().required(),
-  parentId: joi.string(),
-  isRoot: joi.boolean().default(false),
-});
-
-const getDirectoriesResponse = joi.object({
-  directories: joi.array().items(directoryResponse),
-});
-
-const getFileResponse = joi.object({
-  content: joi.object(),
+  type: joi.string().required(),
 });
 
 const updateRequest = joi.object({
@@ -41,9 +25,6 @@ const updateRequest = joi.object({
 
 export default {
   createFileRequest,
-  directoryResponse,
   createFolderRequest,
-  getDirectoriesResponse,
-  getFileResponse,
   updateRequest,
 };
