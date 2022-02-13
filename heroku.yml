@@ -1,5 +1,4 @@
 build:
   docker:
-    gateway: Dockerfile.gateway
-    user: Dockerfile.user
-    directory: Dockerfile.directory
+    web: Dockerfile.gateway
+    worker: Dockerfile.user
