@@ -19,7 +19,12 @@ Document Management System
 
 ---
 
-## To run locally
+## To deploy & run
 
-$ yarn install
-$ yarn start
+$ docker-compose up --build
+
+- Above command will up 3 servers (user, directory, gateway)
+
+## Try/Test
+
+http://localhost:4000/ping

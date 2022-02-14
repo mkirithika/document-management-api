@@ -20,7 +20,6 @@ const create = (call, send) => {
     // On receive end, validate and save
     call.on("end", async () => {
       try {
-        console.log(directoryInfo);
         const directory = await save(directoryInfo, fileBuffer);
         send(null, directory);
       } catch (error) {

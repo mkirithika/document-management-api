@@ -1,0 +1,206 @@
+{
+	"variables": [],
+	"info": {
+		"name": "ZI",
+		"_postman_id": "be2b11b2-392c-448c-7b69-0dd8e9016618",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "login",
+			"request": {
+				"url": "localhost:4000/login",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"assignment@dms.in\",\n\t\"password\": \"123456\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create/Upload Files",
+			"request": {
+				"url": "localhost:4000/directories",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/",
+						"description": "",
+						"disabled": true
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NDQ4MTExNTUsImRhdGEiOnsiaWQiOiI2MjA4ZjhmMDZlMjUwZjM0ZjhlZjY0MjEiLCJuYW1lIjoiRE1TIiwiZW1haWwiOiJhc3NpZ25tZW50QGRtcy5pbiJ9LCJpYXQiOjE2NDQ4MDc1NTV9.Pt3JRhS9vp9pIgALsDBF134WhHn5waWOQdXKAFTEsQw",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"description": "",
+							"type": "file",
+							"src": "sizecheck.txt"
+						},
+						{
+							"key": "parentId",
+							"value": "6209c5b76c543297b0b09d75",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "type",
+							"value": "file",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "folder1",
+							"description": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get All",
+			"request": {
+				"url": "localhost:4000/directories",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NDQ4MTExNTUsImRhdGEiOnsiaWQiOiI2MjA4ZjhmMDZlMjUwZjM0ZjhlZjY0MjEiLCJuYW1lIjoiRE1TIiwiZW1haWwiOiJhc3NpZ25tZW50QGRtcy5pbiJ9LCJpYXQiOjE2NDQ4MDc1NTV9.Pt3JRhS9vp9pIgALsDBF134WhHn5waWOQdXKAFTEsQw",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get File",
+			"request": {
+				"url": "localhost:4000/directories/files/6209c59f6c543297b0b09d70",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NDQ4MTExNTUsImRhdGEiOnsiaWQiOiI2MjA4ZjhmMDZlMjUwZjM0ZjhlZjY0MjEiLCJuYW1lIjoiRE1TIiwiZW1haWwiOiJhc3NpZ25tZW50QGRtcy5pbiJ9LCJpYXQiOjE2NDQ4MDc1NTV9.Pt3JRhS9vp9pIgALsDBF134WhHn5waWOQdXKAFTEsQw",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Update",
+			"request": {
+				"url": "localhost:4000/directories/6209c59f6c543297b0b09d70",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NDQ4MTExNTUsImRhdGEiOnsiaWQiOiI2MjA4ZjhmMDZlMjUwZjM0ZjhlZjY0MjEiLCJuYW1lIjoiRE1TIiwiZW1haWwiOiJhc3NpZ25tZW50QGRtcy5pbiJ9LCJpYXQiOjE2NDQ4MDc1NTV9.Pt3JRhS9vp9pIgALsDBF134WhHn5waWOQdXKAFTEsQw",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Perfect\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"url": {
+					"raw": "localhost:4000/directories/6208bfc6ee0fcfefa63ab514?type=folder",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"directories",
+						"6208bfc6ee0fcfefa63ab514"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "folder",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NDQ4MTExNTUsImRhdGEiOnsiaWQiOiI2MjA4ZjhmMDZlMjUwZjM0ZjhlZjY0MjEiLCJuYW1lIjoiRE1TIiwiZW1haWwiOiJhc3NpZ25tZW50QGRtcy5pbiJ9LCJpYXQiOjE2NDQ4MDc1NTV9.Pt3JRhS9vp9pIgALsDBF134WhHn5waWOQdXKAFTEsQw",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "signup",
+			"request": {
+				"url": "localhost:4000/signup",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"assignment@dms.in\",\n\t\"password\": \"123456\",\n\t\"name\": \"DMS\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
